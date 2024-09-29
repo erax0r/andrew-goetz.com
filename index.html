@@ -25,10 +25,22 @@
             overflow: hidden;
         }
 
-        header {
+        /* Old monitor effect */
+        .monitor {
+            width: 80%;
+            max-width: 1200px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 5px solid #00FF41;
+            border-radius: 10px;
+            box-shadow: 0px 0px 30px rgba(0, 255, 65, 0.75);
             text-align: center;
-            margin-bottom: 2rem;
+            position: relative;
             z-index: 10;
+        }
+
+        header {
+            margin-bottom: 2rem;
         }
 
         h1 {
@@ -74,7 +86,6 @@
             gap: 1.5rem;
             justify-content: center;
             flex-wrap: wrap;
-            z-index: 10;
         }
 
         .project {
@@ -84,7 +95,7 @@
             width: 300px;
             text-align: center;
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
-            position: relative;
+            border: 2px solid #00FF41;
         }
 
         .project:hover {
@@ -104,11 +115,36 @@
             color: #00FF41;
         }
 
+        /* Hyperlink Styling */
+        a {
+            display: inline-block;
+            color: #00FF41;
+            font-weight: bold;
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 3px;
+        }
+
+        a::after {
+            content: '';
+            display: block;
+            height: 2px;
+            background: #00FF41;
+            transition: width 0.3s;
+            width: 0;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        a:hover::after {
+            width: 100%;
+        }
+
         footer {
             margin-top: 2rem;
             color: #888;
             font-size: 0.9rem;
-            z-index: 10;
         }
 
         .social-links {
@@ -143,6 +179,7 @@
 
 <canvas class="matrix-canvas"></canvas>
 
+<div class="monitor">
 <header>
     <img src="https://avatars.githubusercontent.com/u/8998358?s=400&u=fa784999fd34e27a6d430477d4981aa7e7bd2e00&v=4" alt="Andrew Goetz" class="avatar">
     <h1>Andrew Goetz</h1>
@@ -169,6 +206,7 @@
         <a href="https://www.linkedin.com/in/andrewgoetz/" target="_blank">LinkedIn</a>
     </div>
 </footer>
+</div>
 
 <!-- Matrix Falling Code Effect -->
 <script>
