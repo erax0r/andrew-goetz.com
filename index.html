@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Andrew Goetz - AI Developer">
     <title>Andrew Goetz | AI Developer</title>
     <style>
         /* General Styling */
@@ -22,15 +22,15 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
-        /* Old monitor effect */
+        /* Semi-Transparent Monitor */
         .monitor {
-            width: 80%;
+            width: 90%;
             max-width: 1200px;
-            padding: 30px;
-            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.9);
             border: 5px solid #00FF41;
             border-radius: 10px;
             box-shadow: 0px 0px 30px rgba(0, 255, 65, 0.75);
@@ -40,11 +40,11 @@
         }
 
         header {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             font-weight: 800;
             color: #00FF41;
             text-shadow: 0px 0px 15px rgba(0, 255, 65, 0.75);
@@ -61,94 +61,124 @@
         }
 
         p {
-            font-size: 1.2rem;
-            margin-top: 1rem;
+            font-size: 1rem;
+            margin-top: 0.5rem;
             color: #00FF41;
         }
 
         .avatar {
+            position: relative;
             border-radius: 50%;
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
             margin: 1rem auto;
+            overflow: hidden;
             transition: transform 0.6s ease;
             box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+            /* Apply Matrix effect */
+            filter: grayscale(100%) brightness(0.7) contrast(1.2) hue-rotate(90deg);
+        }
+
+        .avatar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Simulate Matrix code overlay using CSS gradients */
+            background: repeating-linear-gradient(
+                transparent,
+                transparent 2px,
+                rgba(0, 255, 65, 0.2) 2px,
+                rgba(0, 255, 65, 0.2) 4px
+            ),
+            repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 255, 65, 0.2) 2px,
+                rgba(0, 255, 65, 0.2) 4px
+            );
+            mix-blend-mode: overlay;
+            pointer-events: none;
         }
 
         .avatar:hover {
-            transform: scale(1.2) rotate(360deg);
+            transform: scale(1.1) rotate(360deg);
         }
 
         /* Project Cards */
         .projects {
-            margin-top: 2rem;
+            margin-top: 1.5rem;
             display: flex;
+            flex-direction: column;
             gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
+            align-items: center;
         }
 
         .project {
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 2rem;
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 1.5rem;
             border-radius: 15px;
-            width: 300px;
+            width: 100%;
+            max-width: 300px;
             text-align: center;
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
             border: 2px solid #00FF41;
+            color: inherit; /* Ensure text color is inherited */
+            text-decoration: none; /* Remove underline from links */
+            display: block;
         }
 
         .project:hover {
-            transform: scale(1.05) translateY(-10px);
+            transform: scale(1.05);
             box-shadow: 0px 0px 25px rgba(0, 255, 65, 0.7);
         }
 
+        .project h2,
+        .project p {
+            text-decoration: none;
+            font-weight: normal; /* Ensure text is not bold */
+        }
+
         .project h2 {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: #00FF41;
             text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+            font-weight: bold; /* Keep the project title bold */
         }
 
         .project p {
-            margin-top: 1rem;
-            font-size: 1rem;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
             color: #00FF41;
         }
 
         /* Hyperlink Styling */
         a {
-            display: inline-block;
             color: #00FF41;
-            font-weight: bold;
             text-decoration: none;
-            position: relative;
-            padding-bottom: 3px;
         }
 
-        a::after {
-            content: '';
-            display: block;
-            height: 2px;
-            background: #00FF41;
-            transition: width 0.3s;
-            width: 0;
-            position: absolute;
-            bottom: 0;
-            left: 0;
+        /* Apply bold font weight to specific links */
+        .footer-link {
+            font-weight: bold;
         }
 
-        a:hover::after {
-            width: 100%;
+        /* Underline on hover for footer links */
+        .footer-link:hover {
+            text-decoration: underline;
         }
 
         footer {
-            margin-top: 2rem;
+            margin-top: 1.5rem;
             color: #888;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
 
         .social-links {
-            margin-top: 1.5rem;
+            margin-top: 1rem;
         }
 
         .social-links a {
@@ -156,15 +186,17 @@
             color: #00FF41;
             text-decoration: none;
             transition: transform 0.3s ease;
+            font-weight: bold;
         }
 
         .social-links a:hover {
-            transform: scale(1.2);
+            transform: scale(1.1);
+            text-decoration: underline;
         }
 
         /* Matrix Falling Code */
         .matrix-canvas {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -173,6 +205,29 @@
             background: #000;
         }
 
+        /* Media Queries for Larger Screens */
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+            .projects {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .project {
+                width: calc(50% - 1rem);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+            .project {
+                width: calc(33.333% - 1rem);
+            }
+        }
     </style>
 </head>
 <body>
@@ -180,32 +235,30 @@
 <canvas class="matrix-canvas"></canvas>
 
 <div class="monitor">
-<header>
-    <img src="https://avatars.githubusercontent.com/u/8998358?s=400&u=fa784999fd34e27a6d430477d4981aa7e7bd2e00&v=4" alt="Andrew Goetz" class="avatar">
-    <h1>Andrew Goetz</h1>
-    <p>Software Developer | AI Enthusiast</p>
-</header>
+    <header>
+        <img src="https://avatars.githubusercontent.com/u/8998358?s=400&u=fa784999fd34e27a6d430477d4981aa7e7bd2e00&v=4" alt="Andrew Goetz" class="avatar">
+        <h1>Andrew Goetz</h1>
+        <p>Software Developer | AI Enthusiast</p>
+    </header>
 
-<main class="projects">
-    <div class="project">
-        <h2>AgiGUI</h2>
-        <p>An advanced AI-powered graphical interface for streamlined workflows and automation.</p>
-        <a href="https://www.agigui.com" target="_blank">Learn More</a>
-    </div>
-    <div class="project">
-        <h2>pytextpopup</h2>
-        <p>A Python module for creating intuitive text-based popups with speech integration.</p>
-        <a href="https://pypi.org/project/pytextpopup/" target="_blank">Learn More</a>
-    </div>
-</main>
+    <main class="projects">
+        <a href="https://www.agigui.com" target="_blank" class="project">
+            <h2>AgiGUI</h2>
+            <p>An advanced AI-powered graphical interface for streamlined workflows and automation.</p>
+        </a>
+        <a href="https://pypi.org/project/pytextpopup/" target="_blank" class="project">
+            <h2>pytextpopup</h2>
+            <p>A Python module for creating intuitive text-based popups with speech integration.</p>
+        </a>
+    </main>
 
-<footer>
-    <p>&copy; 2024 Andrew Goetz. All Rights Reserved.</p>
-    <div class="social-links">
-        <a href="https://github.com/erax0r" target="_blank">GitHub</a>
-        <a href="https://www.linkedin.com/in/andrewgoetz/" target="_blank">LinkedIn</a>
-    </div>
-</footer>
+    <footer>
+        <p>&copy; 2024 Andrew Goetz. All Rights Reserved.</p>
+        <div class="social-links">
+            <a href="https://github.com/erax0r" target="_blank" class="footer-link">GitHub</a>
+            <a href="https://www.linkedin.com/in/andrewgoetz/" target="_blank" class="footer-link">LinkedIn</a>
+        </div>
+    </footer>
 </div>
 
 <!-- Matrix Falling Code Effect -->
@@ -213,42 +266,57 @@
     const canvas = document.querySelector('.matrix-canvas');
     const ctx = canvas.getContext('2d');
 
-    // Full screen canvas
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const matrixChars = '01';
+    // Matrix characters from the movie (Japanese katakana and other symbols)
+    const matrixChars = 'アカサタナハマヤラワ0123456789ﾊﾐﾍｳｼ*+-/<=>?@#$%^&*()';
     const fontSize = 16;
-    const columns = canvas.width / fontSize;
+    let columns;
+    let drops;
 
-    // Array of drop positions for each column
-    const drops = Array.from({ length: columns }, () => 1);
+    // Function to initialize the canvas and drops
+    function initializeMatrix() {
+        // Full screen canvas
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
+        columns = Math.floor(canvas.width / fontSize);
+        // Reset drops array
+        drops = Array(columns).fill(0);
+    }
+
+    // Draw the characters
     function drawMatrix() {
+        // Fade the canvas slightly to create the trail effect
         ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         ctx.fillStyle = '#00FF41'; // Green code
         ctx.font = `${fontSize}px monospace`;
 
-        drops.forEach((y, index) => {
-            const text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
-            const x = index * fontSize;
-            ctx.fillText(text, x, y * fontSize);
+        // Loop over drops
+        for (let i = 0; i < drops.length; i++) {
+            const text = matrixChars.charAt(Math.floor(Math.random() * matrixChars.length));
+            const x = i * fontSize;
+            const y = drops[i] * fontSize;
 
-            if (y * fontSize > canvas.height && Math.random() > 0.975) {
-                drops[index] = 0;
+            ctx.fillText(text, x, y);
+
+            // Reset drop to top after it passes the bottom randomly
+            if (y > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
             }
 
-            drops[index]++;
-        });
+            // Increment Y coordinate
+            drops[i]++;
+        }
     }
 
+    // Initialize and start the animation
+    initializeMatrix();
     setInterval(drawMatrix, 50);
 
+    // Reinitialize on window resize
     window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        initializeMatrix();
     });
 </script>
 
