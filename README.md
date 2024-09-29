@@ -1,1 +1,1 @@
-# andrew-goetz.com
+www.andrew-goetz.com
